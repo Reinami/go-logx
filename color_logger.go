@@ -8,11 +8,11 @@ import (
 )
 
 const (
-	colorReset  = "\033[0m"
-	colorRed    = "\033[31m"
-	colorYellow = "\033[33m"
-	colorGreen  = "\033[32m"
-	colorBlue   = "\033[34m"
+	COLOR_RESET  = "\033[0m"
+	COLOR_RED    = "\033[31m"
+	COLOR_YELLOW = "\033[33m"
+	COLOR_GREEN  = "\033[32m"
+	COLOR_BLUE   = "\033[34m"
 )
 
 type ColorLogger struct{}
@@ -32,7 +32,7 @@ func (c *ColorLogger) Handle(_ context.Context, r slog.Record) error {
 
 	fmt.Printf("%s %s[%s]%s %s\n",
 		timestamp,
-		color, levelLabel, colorReset,
+		color, levelLabel, COLOR_RESET,
 		r.Message,
 	)
 
@@ -45,12 +45,12 @@ func (c *ColorLogger) WithGroup(_ string) slog.Handler      { return c }
 func levelColor(level slog.Level) (string, string) {
 	switch {
 	case level >= slog.LevelError:
-		return colorRed, "ERROR"
+		return COLOR_RED, "ERROR"
 	case level == slog.LevelWarn:
-		return colorYellow, "WARN"
+		return COLOR_YELLOW, "WARN"
 	case level == slog.LevelInfo:
-		return colorGreen, "INFO"
+		return COLOR_GREEN, "INFO"
 	default:
-		return colorBlue, "DEBUG"
+		return COLOR_BLUE, "DEBUG"
 	}
 }
